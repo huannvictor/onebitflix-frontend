@@ -5,7 +5,8 @@ const HomeNoAuth = () => {
   return (
     <>
       <Head>
-        <title>Home</title>
+        <title>OneBitFlix</title>
+        <link rel="shortcut icon" href="/" type="image/x-icon" />
       </Head>
       <main></main>
     </>

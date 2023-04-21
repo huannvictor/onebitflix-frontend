@@ -6,7 +6,12 @@ const HomeNoAuth = () => {
     <>
       <Head>
         <title>OneBitFlix</title>
-        <link rel="shortcut icon" href="/" type="image/x-icon" />
+        <link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml" />
+        <meta property="og:title" content="OneBitFlix" key="title" />
+        <meta
+          name="description"
+          content="Tenha cesso aos melhores conteúdos de programação de uma forma simples e fácil!"
+        />
       </Head>
       <main></main>
     </>

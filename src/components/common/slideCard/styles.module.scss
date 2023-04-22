@@ -7,8 +7,12 @@
   cursor: pointer;
   overflow: hidden;
   text-overflow: clip;
-  transition: 0.4;
   margin-left: 12px;
+  transition: 0.4s;
+  -webkit-transition: 0.4s;
+  -moz-transition: 0.4s;
+  -ms-transition: 0.4s;
+  -o-transition: 0.4s;
   &:hover {
     border-color: $lightRed;
     height: 330px;
@@ -31,8 +35,6 @@
 }
 
 .slideDescription {
-  color: white;
-  font-weight: bold;
   padding: 8px 16px;
   font-size: 14px;
   color: #ccc8c8;

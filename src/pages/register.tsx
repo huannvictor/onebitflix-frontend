@@ -2,12 +2,70 @@
 /* eslint-disable @next/next/no-img-element */
 import Head from "next/head";
 import HeaderGeneric from "@/components/common/headerGeneric";
-
-import styles from "../styles/registerLogin.module.scss";
 import { Button, Container, Form, FormGroup, Input, Label } from "reactstrap";
 import Footer from "@/components/common/footer";
 
+import { FormEvent, useState } from "react";
+import { useRouter } from "next/router";
+
+import authService from "@/services/authService";
+
+import styles from "../styles/registerLogin.module.scss";
+import ToastComponent from "@/components/common/toast";
+
 const Register = () => {
+  const router = useRouter();
+
+  const [toastIsOpen, setToastIsOpen] = useState(false);
+
+  const [toastMessage, setToastMessage] = useState("");
+
+  const handleRegister = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const formData = new FormData(event.currentTarget);
+    const firstName = formData.get("firstName")!.toString();
+    const lastName = formData.get("lastName")!.toString();
+    const phone = formData.get("phone")!.toString();
+    const birth = formData.get("birth")!.toString();
+    const email = formData.get("email")!.toString();
+    const password = formData.get("password")!.toString();
+    const confirmPassword = formData.get("confirmPassword")!.toString();
+
+    const params = {
+      firstName,
+      lastName,
+      phone,
+      birth,
+      email,
+      password,
+    };
+
+    if (password !== confirmPassword) {
+      setToastIsOpen(true);
+      setTimeout(() => {
+        setToastIsOpen(false);
+      }, 3000);
+
+      setToastMessage("Senha e confirmação diferentes.");
+
+      return;
+    }
+
+    const data = await authService.register(params);
+
+    if (data.status === 201) {
+      router.push("/login?registered=true");
+    } else {
+      setToastIsOpen(true);
+      setTimeout(() => {
+        setToastIsOpen(false);
+      }, 3000);
+
+      setToastMessage(data.message);
+    }
+  };
+
   return (
     <>
       <Head>
@@ -25,7 +83,7 @@ const Register = () => {
         <Container className="py-5">
           <p className={styles.formTitle}>Bem vindo(a) ao OneBitFlix!</p>
 
-          <Form className={styles.form}>
+          <Form className={styles.form} onSubmit={handleRegister}>
             <p className="text-center">
               <strong>Faça a sua conta!</strong>
             </p>
@@ -121,12 +179,12 @@ const Register = () => {
             </FormGroup>
 
             <FormGroup>
-              <Label for="password" className={styles.label}>
+              <Label for="confirmPassword" className={styles.label}>
                 CONFIRME SUA SENHA
               </Label>
               <Input
-                id="password"
-                name="password"
+                id="confirmPassword"
+                name="confirmPassword"
                 type="password"
                 placeholder="Confirme a sua senha"
                 required
@@ -143,6 +201,12 @@ const Register = () => {
         </Container>
 
         <Footer />
+
+        <ToastComponent
+          color="bg-danger"
+          isOpen={toastIsOpen}
+          message={toastMessage}
+        />
       </main>
     </>
   );

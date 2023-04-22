@@ -1,12 +1,15 @@
+import { ReactNode } from "react";
+import { GetStaticProps } from "next";
+import courseService, { CourseType } from "@/services/courseService";
+
 import Head from "next/head";
-import styles from "../styles/HomeNoAuth.module.scss";
 import HeaderNoAuth from "@/components/HomeNoAuth/headerNoAuth";
 import PresentationSection from "@/components/HomeNoAuth/presentationSection";
 import CardsSection from "@/components/HomeNoAuth/cardsSection";
 import SlideSection from "@/components/HomeNoAuth/slideSection";
-import { GetStaticProps } from "next";
-import courseService, { CourseType } from "@/services/courseService";
-import { ReactNode } from "react";
+import Footer from "@/components/common/footer";
+
+import styles from "../styles/HomeNoAuth.module.scss";
 
 interface IndexPageProps {
   children?: ReactNode;
@@ -32,6 +35,7 @@ const HomeNoAuth = ({ course }: IndexPageProps) => {
         </div>
         <CardsSection />
         <SlideSection newestCourses={course} />
+        <Footer />
       </main>
     </>
   );

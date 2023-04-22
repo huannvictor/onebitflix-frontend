@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
-import { CourseType } from "@/services/courseService";
 import styles from "./styles.module.scss";
+
+import { CourseType } from "@/services/courseService";
 
 interface props {
   course: CourseType;
@@ -11,7 +12,7 @@ const SlideCard = ({ course }: props) => {
     <>
       <div className={styles.slide}>
         <img
-          src={`${process.env.NEXT_PUBLIC_BASEURL}/${course.thumbnailUrl}`}
+          src={`${process.env.NEXT_PUBLIC_BASEURL!}/${course.thumbnailUrl}`}
           alt={course.name}
           className={styles.slideImg}
         />

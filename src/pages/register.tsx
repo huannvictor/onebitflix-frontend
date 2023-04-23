@@ -15,9 +15,7 @@ import ToastComponent from "@/components/common/toast";
 
 const Register = () => {
   const router = useRouter();
-
   const [toastIsOpen, setToastIsOpen] = useState(false);
-
   const [toastMessage, setToastMessage] = useState("");
 
   const handleRegister = async (event: FormEvent<HTMLFormElement>) => {

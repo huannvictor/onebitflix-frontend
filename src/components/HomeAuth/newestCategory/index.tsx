@@ -1,9 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 import useSWR from "swr";
-import courseService, { CourseType } from "@/services/courseService";
+import courseService from "@/services/courseService";
 import SlideComponent from "@/components/common/slideComponent";
 
-import styles from "../../../styles/styles.module.scss";
+import styles from "../../../styles/slideCategory.module.scss";
 
 const NewestCategory = () => {
   const { data, error } = useSWR("/newest", courseService.getNewestCourse);

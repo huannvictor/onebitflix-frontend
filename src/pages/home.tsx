@@ -2,8 +2,7 @@
 import Head from "next/head";
 import FeaturesSection from "@/components/HomeAuth/featuresSection";
 import NewestCategory from "@/components/HomeAuth/newestCategory";
-
-import styles from "./styles.module.scss";
+import FavoriteCategory from "@/components/HomeAuth/favoriteCategory";
 
 const HomeAuth = () => {
   return (
@@ -15,6 +14,7 @@ const HomeAuth = () => {
       <main>
         <FeaturesSection />
         <NewestCategory />
+        <FavoriteCategory />
       </main>
     </>
   );

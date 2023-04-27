@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import Head from "next/head";
 import FeaturesSection from "@/components/HomeAuth/featuresSection";
+import NewestCategory from "@/components/HomeAuth/newestCategory";
 
 import styles from "./styles.module.scss";
 
@@ -13,6 +14,7 @@ const HomeAuth = () => {
       </Head>
       <main>
         <FeaturesSection />
+        <NewestCategory />
       </main>
     </>
   );

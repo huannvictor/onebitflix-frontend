@@ -99,8 +99,12 @@
 
 .input {
   @extend .inputFlex;
-  text-transform: lowercase;
   width: 550px;
+}
+
+.inputEmail {
+  text-transform: lowercase;
+  @extend .input;
 }
 
 .formBtn {

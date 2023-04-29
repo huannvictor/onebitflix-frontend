@@ -25,7 +25,7 @@ const UserForm = () => {
 
         <hr />
 
-        <div>
+        <div className={styles.inputFormDiv}>
           <FormGroup>
             <Label className={styles.label} for="firstName">
               NOME
@@ -38,7 +38,7 @@ const UserForm = () => {
               required
               maxLength={20}
               className={styles.inputFlex}
-              value={"John"}
+              defaultValue={"John"}
             />
           </FormGroup>
           <FormGroup>
@@ -53,12 +53,12 @@ const UserForm = () => {
               required
               maxLength={20}
               className={styles.inputFlex}
-              value={"Doe"}
+              defaultValue={"Doe"}
             />
           </FormGroup>
         </div>
 
-        <div>
+        <div className={styles.inputContactDiv}>
           <FormGroup>
             <Label className={styles.label} for="phone">
               WHATSAPP | TELEGRAM
@@ -70,7 +70,7 @@ const UserForm = () => {
               placeholder="+55 (××) ×××××-××××"
               required
               className={styles.input}
-              value={"+55 (00) 99999-9999"}
+              defaultValue={"+55 (00) 99999-9999"}
             />
           </FormGroup>
 
@@ -85,7 +85,7 @@ const UserForm = () => {
               placeholder="email@mail.com"
               required
               className={styles.input}
-              value={"email@mail.com"}
+              defaultValue={"email@mail.com"}
             />
           </FormGroup>
 

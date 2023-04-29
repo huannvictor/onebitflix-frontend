@@ -1,5 +1,10 @@
 @import "./colors.module.scss";
 
+.header,
+.footer {
+  background-color: black;
+}
+
 .form {
   border: 1px solid $darkGray;
   padding: 20px 0;
@@ -9,6 +14,7 @@
 .formName {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
   width: 80%;
   margin: 20px auto;
@@ -16,12 +22,31 @@
 }
 
 .nameAbbreviation {
+  font-size: 40px;
+  font-weight: bold;
+  min-height: 70px;
+  min-width: 70px;
+  background-color: white;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
 }
 
 .userName {
+  font-size: 30px;
+  font-weight: bold;
 }
 
 .membershipTime {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
 }
 
 .membershipTimeImg {
@@ -29,25 +54,140 @@
 }
 
 .membershipTimeText {
+  font-size: 14px;
+  color: $lightGray;
 }
 
 .label {
+  font-size: 14px;
+  font-weight: bold;
 }
 
-.input {
+.inputFormDiv {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 50px;
 }
 
 .inputFlex {
+  width: 250px;
+  text-transform: uppercase;
+  background-color: transparent;
+  border: 1px solid $darkGray;
+  color: white;
+
+  &::placeholder {
+    color: $lightGray;
+  }
+
+  &:focus {
+    box-shadow: none;
+    border-color: $lightRed;
+    color: $lightGray;
+    background-color: transparent;
+  }
+}
+
+.inputContactDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  gap: 20px;
+}
+
+.input {
+  @extend .inputFlex;
+  text-transform: lowercase;
+  width: 550px;
 }
 
 .formBtn {
+  border-color: $lightRed;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+  font-size: 15px;
+  padding: 6px 20px;
+
+  &:hover {
+    border-color: $darkRed;
+    background-color: transparent;
+    color: $lightGray;
+  }
 }
 
 .title {
+  font-size: 45px;
+  font-weight: bold;
+  padding-bottom: 50px;
 }
 
 .btnColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
 }
 
 .renderForm {
+  width: 200px;
+  border: 1px solid $darkGray;
+  background-color: transparent;
+  font-weight: bold;
+  padding: 14px 0;
+
+  &:hover {
+    background-color: transparent;
+    border-color: $lightRed;
+    color: $lightGray;
+  }
+}
+
+@media (max-width: 995px) {
+  .title {
+    text-align: center;
+  }
+
+  .btnColumn {
+    width: 100%;
+    margin-bottom: 40px;
+  }
+}
+
+@media (max-width: 767px) {
+  .inputFormDiv {
+    gap: 20px;
+  }
+
+  .inputFlex {
+    width: 400px;
+  }
+}
+
+@media (max-width: 460px) {
+  .title {
+    font-size: 30px;
+    padding-bottom: 16px;
+  }
+
+  .nameAbbreviation {
+    font-size: 30px;
+    min-height: 60px;
+    min-width: 60px;
+  }
+
+  .userName {
+    font-size: 25px;
+  }
+
+  .inputFormDiv {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .inputFlex {
+    width: 95%;
+  }
 }

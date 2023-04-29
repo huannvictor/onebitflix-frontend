@@ -3,16 +3,27 @@ import { Container, Form, Input } from "reactstrap";
 import Link from "next/link";
 import Modal from "react-modal";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
 import styles from "./styles.module.scss";
+import profileService from "@/services/profileService";
 
 Modal.setAppElement("#__next");
 
 const HeaderAuth = () => {
   const router = useRouter();
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [initials, setInitials] = useState("");
+
+  useEffect(() => {
+    profileService.fetchCurrent().then((user) => {
+      const firstNameInicial = user.firstName.slice(0, 1);
+      const lastNameInicial = user.lastName.slice(0, 1);
+
+      setInitials(firstNameInicial + lastNameInicial);
+    });
+  }, []);
 
   const handleToggleModal = () => {
     modalIsOpen ? setModalIsOpen(false) : setModalIsOpen(true);
@@ -51,7 +62,7 @@ const HeaderAuth = () => {
           />
 
           <p className={styles.userProfile} onClick={handleToggleModal}>
-            HA
+            {initials}
           </p>
         </div>
 

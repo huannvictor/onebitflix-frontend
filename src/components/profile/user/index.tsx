@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import { useRouter } from "next/router";
 import { FormEvent, useEffect, useState } from "react";
 import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 import ToastComponent from "@/components/common/toast";
@@ -7,6 +8,8 @@ import profileService from "@/services/profileService";
 import styles from "../../../styles/profile.module.scss";
 
 const UserForm = () => {
+  const router = useRouter();
+
   const [color, setColor] = useState("");
   const [toastIsOpen, setToastIsOpen] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
@@ -14,6 +17,7 @@ const UserForm = () => {
   const [lastName, setLastName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
+  const [initialEmail, setInitialEmail] = useState(email);
   const [created_at, setCreated_at] = useState("");
 
   const [savedFirstName, setSavedFirstName] = useState("");
@@ -21,6 +25,14 @@ const UserForm = () => {
 
   const [abbreviation, setAbbreviation] = useState("");
   const [fullName, setFullName] = useState("");
+
+  const date = new Date(created_at);
+  const month = date.toLocaleDateString("default", { month: "long" });
+
+  const handleLogout = () => {
+    sessionStorage.clear();
+    router.push("/");
+  };
 
   useEffect(() => {
     profileService.fetchCurrent().then((user) => {
@@ -30,6 +42,7 @@ const UserForm = () => {
       setSavedLastName(user.lastName);
       setPhone(user.phone);
       setEmail(user.email);
+      setInitialEmail(user.email);
       setCreated_at(user.createdAt);
     });
   }, []);
@@ -52,8 +65,6 @@ const UserForm = () => {
       setTimeout(() => {
         setToastIsOpen(false);
       }, 3000);
-
-      return;
     }
 
     setFullName(`${firstName} ${lastName}`);
@@ -65,6 +76,8 @@ const UserForm = () => {
     setTimeout(() => {
       setToastIsOpen(false);
     }, 3000);
+
+    if (email !== initialEmail) handleLogout();
   };
 
   return (
@@ -88,7 +101,7 @@ const UserForm = () => {
           />
           <p className={styles.membershipTimeText}>
             Membro desde <br />
-            20 de Abril de 2020
+            {`${date.getDate()} de ${month} de ${date.getFullYear()}`}
           </p>
         </div>
 

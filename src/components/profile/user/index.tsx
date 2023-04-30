@@ -87,10 +87,16 @@ const UserForm = () => {
           <p className={styles.nameAbbreviation}>
             {abbreviation
               ? `${abbreviation}`
-              : `${savedFirstName[0]}${savedLastName[0]}`}
+              : savedFirstName && savedLastName
+              ? `${savedFirstName[0]}${savedLastName[0]}`
+              : ""}
           </p>
           <p className={styles.userName}>
-            {fullName ? fullName : `${savedFirstName} ${savedLastName}`}
+            {fullName
+              ? fullName
+              : savedFirstName && savedLastName
+              ? `${savedFirstName} ${savedLastName}`
+              : "NOME SOBRENOME"}
           </p>
         </div>
         <div className={styles.membershipTime}>
@@ -174,11 +180,11 @@ const UserForm = () => {
               onChange={(event) => setEmail(event.target.value)}
             />
           </FormGroup>
-
-          <Button className={styles.formBtn} outline type="submit">
-            Alterar
-          </Button>
         </div>
+
+        <Button className={styles.formBtn} outline type="submit">
+          SALVAR ALTERAÇÕES
+        </Button>
       </Form>
 
       <ToastComponent

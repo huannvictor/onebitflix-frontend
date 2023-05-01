@@ -49,7 +49,7 @@ const HeaderAuth = () => {
   return (
     <>
       <Container className={styles.nav}>
-        <Link href="home">
+        <Link href="/home">
           <img
             src="/logoOneBitflix.svg"
             alt="logo onebitflix"

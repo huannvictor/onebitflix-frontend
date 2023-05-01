@@ -91,11 +91,57 @@ const courseService = {
     return res;
   },
 
+  like: async (courseId: number | string) => {
+    const token = sessionStorage.getItem("onebitflix-token");
+
+    const res = await api
+      .post(
+        "/likes",
+        { courseId },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
+      .catch((error) => {
+        return error.response;
+      });
+
+    return res;
+  },
+
+  RemoveLike: async (courseId: number | string) => {
+    const token = sessionStorage.getItem("onebitflix-token");
+
+    const res = await api
+      .delete(`/likes/${courseId}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .catch((error) => {
+        return error.response;
+      });
+
+    return res;
+  },
+
   getSearch: async (name: string) => {
     const token = sessionStorage.getItem("onebitflix-token");
 
     const res = await api
       .get(`/courses/search?name=${name}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .catch((error) => {
+        return error.response;
+      });
+
+    return res;
+  },
+
+  getEpisodes: async (id: number | string) => {
+    const token = sessionStorage.getItem("onebitflix-token");
+
+    const res = await api
+      .get(`/courses/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .catch((error) => {

@@ -36,10 +36,7 @@ const FeaturesSection = () => {
             <Container className="pt-4">
               <p className={styles.title}>{course.name}</p>
               <p className={styles.description}>{course.synopsis}</p>
-              <Link
-                href={`/courses/${course.id}`}
-                className={styles.customLink}
-              >
+              <Link href={`/course/${course.id}`} className={styles.customLink}>
                 <Button outline color="light" className={styles.button}>
                   ACESSE AGORA!
                   <img

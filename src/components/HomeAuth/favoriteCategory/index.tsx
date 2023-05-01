@@ -1,9 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
-import styles from "../../../styles/slideCategory.module.scss";
-
 import useSWR from "swr";
-import courseService from "@/services/courseService";
+import PageSpinner from "@/components/common/spinner";
 import SlideComponent from "@/components/common/slideComponent";
+
+import courseService from "@/services/courseService";
+import styles from "../../../styles/slideCategory.module.scss";
 
 const FavoriteCategory = () => {
   const { data, error } = useSWR("/favorites", courseService.getFavCourses);
@@ -11,11 +12,7 @@ const FavoriteCategory = () => {
   if (error) return error;
 
   if (!data) {
-    return (
-      <>
-        <p>Loading...</p>
-      </>
-    );
+    return <PageSpinner />;
   }
 
   return (

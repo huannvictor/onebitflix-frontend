@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import useSWR from "swr";
+import PageSpinner from "@/components/common/spinner";
 import categoriesService from "@/services/categoriesService";
 import SlideComponent from "@/components/common/slideComponent";
 
@@ -18,11 +19,7 @@ const ListCategorySlide = ({ categoryId, categoryName }: props) => {
   if (error) return error;
 
   if (!data) {
-    return (
-      <>
-        <p>Loading...</p>
-      </>
-    );
+    return <PageSpinner />;
   }
 
   return (

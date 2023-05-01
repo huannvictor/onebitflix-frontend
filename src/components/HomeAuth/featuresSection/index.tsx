@@ -7,6 +7,7 @@ import useSWR from "swr";
 import courseService, { CourseType } from "@/services/courseService";
 
 import styles from "./styles.module.scss";
+import PageSpinner from "@/components/common/spinner";
 
 const FeaturesSection = () => {
   const { data, error } = useSWR("/features", courseService.getFeaturedCourses);
@@ -14,11 +15,7 @@ const FeaturesSection = () => {
   if (error) return error;
 
   if (!data) {
-    return (
-      <>
-        <p>Loading...</p>
-      </>
-    );
+    return <PageSpinner />;
   }
 
   return (

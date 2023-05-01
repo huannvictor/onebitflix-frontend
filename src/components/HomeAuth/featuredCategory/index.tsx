@@ -1,9 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
 import useSWR from "swr";
+import PageSpinner from "@/components/common/spinner";
 import courseService from "@/services/courseService";
+import SlideComponent from "@/components/common/slideComponent";
 
 import styles from "../../../styles/slideCategory.module.scss";
-import SlideComponent from "@/components/common/slideComponent";
 
 const FeaturedCategory = () => {
   const { data, error } = useSWR("/featured", courseService.getFeaturedCourses);
@@ -11,11 +12,7 @@ const FeaturedCategory = () => {
   if (error) return error;
 
   if (!data) {
-    return (
-      <>
-        <p>Loading...</p>
-      </>
-    );
+    return <PageSpinner />;
   }
 
   return (

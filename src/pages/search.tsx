@@ -11,6 +11,7 @@ import styles from "../styles/search.module.scss";
 import SearchCard from "@/components/searchCard";
 import { Container } from "reactstrap";
 import Footer from "@/components/common/footer";
+import PageSpinner from "@/components/common/spinner";
 
 const Search = () => {
   const router = useRouter();
@@ -40,17 +41,21 @@ const Search = () => {
           <HeaderAuth />
         </div>
         {searchResult.length > 0 ? (
-          <div className={styles.searchResult}>
-            <Container className="d-flex flex-wrap justify-content-center gap-4 py-4">
-              {searchResult?.map((course) => (
-                <SearchCard key={course.id} course={course} />
-              ))}
-            </Container>
-          </div>
+          searchResult.length > 0 ? (
+            <div className={styles.searchResult}>
+              <Container className="d-flex flex-wrap justify-content-center gap-4 py-4">
+                {searchResult?.map((course) => (
+                  <SearchCard key={course.id} course={course} />
+                ))}
+              </Container>
+            </div>
+          ) : (
+            <p className={styles.noSearchResult}>
+              Termo: <q>{searchTerm}</q> não encontrado
+            </p>
+          )
         ) : (
-          <p className={styles.noSearchResult}>
-            Termo: <q>{searchTerm}</q> não encontrado
-          </p>
+          <PageSpinner />
         )}
         <div className={styles.footer}>
           <Footer />

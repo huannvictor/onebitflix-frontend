@@ -8,6 +8,7 @@ import styles from "../../../styles/slideCategory.module.scss";
 
 const FavoriteCategory = () => {
   const { data, error } = useSWR("/favorites", courseService.getFavCourses);
+  // console.log(data.data.courses);
 
   if (error) return error;
 
@@ -18,7 +19,7 @@ const FavoriteCategory = () => {
   return (
     <>
       <p className={styles.titleCategory}>MINHA LISTA</p>
-      {data.data.courses?.length >= 1 ? (
+      {data.data.courses?.length > 0 ? (
         <SlideComponent course={data.data.courses} />
       ) : (
         <p className="text-center pt-3 h5">

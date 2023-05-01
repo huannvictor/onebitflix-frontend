@@ -41,21 +41,19 @@ const Search = () => {
           <HeaderAuth />
         </div>
         {searchResult.length > 0 ? (
-          searchResult.length > 0 ? (
-            <div className={styles.searchResult}>
-              <Container className="d-flex flex-wrap justify-content-center gap-4 py-4">
-                {searchResult?.map((course) => (
-                  <SearchCard key={course.id} course={course} />
-                ))}
-              </Container>
-            </div>
-          ) : (
+          <div className={styles.searchContainer}>
+            <Container className="d-flex flex-wrap justify-content-center gap-4 py-4">
+              {searchResult?.map((course) => (
+                <SearchCard key={course.id} course={course} />
+              ))}
+            </Container>
+          </div>
+        ) : (
+          <div className={styles.searchContainer}>
             <p className={styles.noSearchResult}>
               Termo: <q>{searchTerm}</q> não encontrado
             </p>
-          )
-        ) : (
-          <PageSpinner />
+          </div>
         )}
         <div className={styles.footer}>
           <Footer />

@@ -1,10 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
+import { FormEvent, useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import { Container, Form, Input } from "reactstrap";
 import Link from "next/link";
 import Modal from "react-modal";
-
-import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
 
 import styles from "./styles.module.scss";
 import profileService from "@/services/profileService";
@@ -15,6 +14,19 @@ const HeaderAuth = () => {
   const router = useRouter();
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [initials, setInitials] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleSearch = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    router.push(`search?name=${searchTerm}`);
+    setSearchTerm("");
+  };
+
+  const handleSearchOnClick = () => {
+    router.push(`search?name=${searchTerm}`);
+    setSearchTerm("");
+  };
 
   useEffect(() => {
     profileService.fetchCurrent().then((user) => {
@@ -46,12 +58,16 @@ const HeaderAuth = () => {
         </Link>
 
         <div className={`${styles.navLeftItems} d-flex align-items-center`}>
-          <Form>
+          <Form onSubmit={handleSearch}>
             <Input
               name="search"
               type="search"
               placeholder="Pesquisar"
               className={styles.input}
+              value={searchTerm}
+              onChange={(event) =>
+                setSearchTerm(event.currentTarget.value.toLowerCase())
+              }
             />
           </Form>
 
@@ -59,6 +75,7 @@ const HeaderAuth = () => {
             src="/homeAuth/iconSearch.svg"
             alt="lupa header"
             className={styles.searchImg}
+            onClick={handleSearchOnClick}
           />
 
           <p className={styles.userProfile} onClick={handleToggleModal}>

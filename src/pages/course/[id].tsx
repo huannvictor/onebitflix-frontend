@@ -9,6 +9,9 @@ import courseService, { CourseType } from "@/services/courseService";
 import Head from "next/head";
 import HeaderAuth from "@/components/common/headerAuth";
 import { Button, Container } from "reactstrap";
+import PageSpinner from "@/components/common/spinner";
+import EpisodeList from "@/components/episodeList";
+import Footer from "@/components/common/footer";
 
 const CoursePage = () => {
   const [course, setCourse] = useState<CourseType>();
@@ -58,6 +61,8 @@ const CoursePage = () => {
     }
   };
 
+  if (course === undefined) return <PageSpinner />;
+
   return (
     <>
       <Head>
@@ -78,7 +83,11 @@ const CoursePage = () => {
         <Container className={styles.courseInfo}>
           <p className={styles.courseTitle}>{course?.name}</p>
           <p className={styles.courseDescription}>{course?.synopsis}</p>
-          <Button outline className={styles.courseBtn}>
+          <Button
+            outline
+            className={styles.courseBtn}
+            disabled={course?.episodes?.length === 0 ? true : false}
+          >
             ASSISTA AGORA
             <img
               src="/buttonPlay.svg"
@@ -119,6 +128,27 @@ const CoursePage = () => {
             )}
           </div>
         </Container>
+
+        <Container className={styles.episodeInfo}>
+          <p className={styles.epDivision}>EPISÓDIOS</p>
+          <p className={styles.epLength}>
+            {course?.episodes?.length} episódios
+          </p>
+          {course?.episodes?.length === 0 ? (
+            <p>
+              <strong>
+                Não temos episódios no ar ainda, volte outra hora.
+                &#x1F606;&#x1F918;
+              </strong>
+            </p>
+          ) : (
+            course?.episodes?.map((episode) => (
+              <EpisodeList key={episode.id} episode={episode} />
+            ))
+          )}
+        </Container>
+
+        <Footer />
       </main>
     </>
   );

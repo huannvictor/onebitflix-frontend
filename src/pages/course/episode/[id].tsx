@@ -28,6 +28,14 @@ const EpisodePlayer = () => {
     if (res.status === 200) setCourse(res.data);
   };
 
+  const handlePrevEpisode = () => {
+    router.push(`/course/episode/${episodeOrder - 1}?courseid=${course?.id}`);
+  };
+
+  const handleNextEpisode = () => {
+    router.push(`/course/episode/${episodeOrder + 1}?courseid=${course?.id}`);
+  };
+
   useEffect(() => {
     getCourse();
   }, [courseId]);
@@ -62,8 +70,12 @@ const EpisodePlayer = () => {
               controls
             />
           )}
-          <div className={styles.episodeButton}>
-            <Button className={styles.episodeButton} outline>
+          <div className={styles.episodeButtonDiv}>
+            <Button
+              className={styles.episodeButton}
+              disabled={episodeOrder === 0 ? true : false}
+              onClick={handlePrevEpisode}
+            >
               <img
                 src="/episode/iconArrowLeft.svg"
                 alt="left arrow"
@@ -71,7 +83,13 @@ const EpisodePlayer = () => {
               />
             </Button>
 
-            <Button className={styles.episodeButton} outline>
+            <Button
+              className={styles.episodeButton}
+              disabled={
+                episodeOrder + 1 === course.episodes.length ? true : false
+              }
+              onClick={handleNextEpisode}
+            >
               <img
                 src="/episode/iconArrowRight.svg"
                 alt="right arrow"
@@ -79,6 +97,9 @@ const EpisodePlayer = () => {
               />
             </Button>
           </div>
+          <p className="text-center py-4">
+            {course.episodes[episodeOrder].synopsis}
+          </p>
         </Container>
       </main>
     </>

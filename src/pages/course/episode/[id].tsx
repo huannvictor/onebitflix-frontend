@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @next/next/no-img-element */
 import styles from "../../../styles/episodePlayer.module.scss";
@@ -18,14 +19,13 @@ const EpisodePlayer = () => {
 
   const [course, setCourse] = useState<CourseType>();
   const [isReady, setIsReady] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [getEpisodeTime, setGetEpisodeTime] = useState(0);
+  const [episodeTime, setEpisodeTime] = useState(0);
 
   const episodeOrder = parseFloat(router.query.id?.toString() || "");
   const episodeId = parseFloat(router.query.episodeid?.toString() || "");
   const courseId = router.query.courseid?.toString() || "";
-
-  const [getEpisodeTime, setGetEpisodeTime] = useState(0);
-  const [episodeTime, setEpisodeTime] = useState(0);
-
   const playerRef = useRef<ReactPlayer>(null);
 
   const handleGetEpisodeTime = async () => {
@@ -83,12 +83,25 @@ const EpisodePlayer = () => {
   useEffect(() => {
     getCourse();
   }, [courseId]);
+  
+  useEffect(() => {
+    if (!sessionStorage.getItem("onebitflix-token")) {
+      router.push("/login");
+    } else {
+      setLoading(false);
+    }
+  }, []);
 
   if (course?.episodes === undefined) return <PageSpinner />;
 
   if (episodeOrder + 1 < course.episodes.length) {
     if (Math.round(episodeTime) === course.episodes[episodeOrder].secondsLong)
       handleNextEpisode();
+  }
+
+
+  if (loading) {
+    return <PageSpinner />;
   }
 
   return (

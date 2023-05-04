@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @next/next/no-img-element */
 import styles from "../../styles/coursePage.module.scss";
@@ -17,9 +18,18 @@ const CoursePage = () => {
   const [course, setCourse] = useState<CourseType>();
   const [liked, setLiked] = useState(false);
   const [favorite, setFavorite] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const router = useRouter();
   const { id } = router.query;
+
+  useEffect(() => {
+    if (!sessionStorage.getItem("onebitflix-token")) {
+      router.push("/login");
+    } else {
+      setLoading(false);
+    }
+  }, []);
 
   const getCourse = async () => {
     if (typeof id !== "string") return;
@@ -62,6 +72,10 @@ const CoursePage = () => {
   };
 
   if (course === undefined) return <PageSpinner />;
+
+  if (loading) {
+    return <PageSpinner />;
+  }
 
   return (
     <>

@@ -17,6 +17,7 @@ const Search = () => {
   const router = useRouter();
   const searchTerm = router.query.name;
   const [searchResult, setSearchResult] = useState<CourseType[]>([]);
+  const [loading, setLoading] = useState(true);
 
   const searchCourses = async () => {
     if (typeof searchTerm === "string") {
@@ -29,6 +30,18 @@ const Search = () => {
   useEffect(() => {
     searchCourses();
   }, [searchTerm]);
+
+  useEffect(() => {
+    if (!sessionStorage.getItem("onebitflix-token")) {
+      router.push("/login");
+    } else {
+      setLoading(false);
+    }
+  }, []);
+
+  if (loading) {
+    return <PageSpinner />;
+  }
 
   return (
     <>

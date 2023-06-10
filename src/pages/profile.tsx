@@ -1,15 +1,16 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 
-import Head from "next/head";
-import { Button, Col, Container, Row } from "reactstrap";
+import Footer from "@/components/common/footer";
 import HeaderAuth from "@/components/common/headerAuth";
 import UserForm from "@/components/profile/user";
-import Footer from "@/components/common/footer";
+import Head from "next/head";
+import { Button, Col, Container, Row } from "reactstrap";
 
-import styles from "../styles/profile.module.scss";
+import PageSpinner from "@/components/common/spinner";
 import PasswordForm from "@/components/profile/password";
 import { useRouter } from "next/router";
-import PageSpinner from "@/components/common/spinner";
+import styles from "../styles/profile.module.scss";
 
 const UserInfo = () => {
   const [form, setForm] = useState("userForm");

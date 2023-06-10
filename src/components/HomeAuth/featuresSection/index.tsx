@@ -1,13 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
 import HeaderAuth from "@/components/common/headerAuth";
-import { Button, Container } from "reactstrap";
 import Link from "next/link";
+import { Button, Container } from "reactstrap";
 
-import useSWR from "swr";
 import courseService, { CourseType } from "@/services/courseService";
+import useSWR from "swr";
 
-import styles from "./styles.module.scss";
 import PageSpinner from "@/components/common/spinner";
+import styles from "./styles.module.scss";
 
 const FeaturesSection = () => {
   const { data, error } = useSWR("/features", courseService.getFeaturedCourses);
@@ -36,7 +36,7 @@ const FeaturesSection = () => {
             <Container className="pt-4">
               <p className={styles.title}>{course.name}</p>
               <p className={styles.description}>{course.synopsis}</p>
-              <Link href={`/course/${course.id}`} className={styles.customLink}>
+              <Link href={`/course/${course.id}`} >
                 <Button outline color="light" className={styles.button}>
                   ACESSE AGORA!
                   <img

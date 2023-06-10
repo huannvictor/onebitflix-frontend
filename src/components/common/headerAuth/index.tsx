@@ -90,7 +90,7 @@ const HeaderAuth = () => {
           className={styles.modal}
           overlayClassName={styles.overlayModal}
         >
-          <Link href="/profile" className={styles.customLink}>
+          <Link href="/profile">
             <p className={styles.modalLink}>Meus Dados</p>
           </Link>
 

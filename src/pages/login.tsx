@@ -1,15 +1,16 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @next/next/no-img-element */
 import { useRouter } from "next/router";
 import { FormEvent, useEffect, useState } from "react";
 
-import Head from "next/head";
-import HeaderGeneric from "@/components/common/headerGeneric";
-import { Button, Container, Form, FormGroup, Input, Label } from "reactstrap";
 import Footer from "@/components/common/footer";
+import HeaderGeneric from "@/components/common/headerGeneric";
+import Head from "next/head";
+import { Button, Container, Form, FormGroup, Input, Label } from "reactstrap";
 
-import styles from "../styles/registerLogin.module.scss";
 import ToastComponent from "@/components/common/toast";
 import authService from "@/services/authService";
+import styles from "../styles/registerLogin.module.scss";
 
 const Login = () => {
   const router = useRouter();

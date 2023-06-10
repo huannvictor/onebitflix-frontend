@@ -4,7 +4,7 @@ import PageSpinner from "@/components/common/spinner";
 import useSWR from "swr";
 
 import courseService from "@/services/courseService";
-import styles from "@/styles/slideCategory.module.scss";
+import styles from "../../../../styles/slideCategory.module.scss";
 
 const FavoriteCategory = () => {
   const { data, error } = useSWR("/favorites", courseService.getFavCourses);

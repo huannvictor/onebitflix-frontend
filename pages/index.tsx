@@ -1,17 +1,17 @@
-import { ReactNode, useEffect } from "react";
-import { GetStaticProps } from "next";
-import AOS from "aos";
 import courseService, { CourseType } from "@/services/courseService";
+import AOS from "aos";
+import { GetStaticProps } from "next";
+import { ReactNode, useEffect } from "react";
 
-import Head from "next/head";
+import CardsSection from "@/components/HomeNoAuth/cardsSection";
 import HeaderNoAuth from "@/components/HomeNoAuth/headerNoAuth";
 import PresentationSection from "@/components/HomeNoAuth/presentationSection";
-import CardsSection from "@/components/HomeNoAuth/cardsSection";
 import SlideSection from "@/components/HomeNoAuth/slideSection";
 import Footer from "@/components/common/footer";
+import Head from "next/head";
 
-import styles from "../styles/HomeNoAuth.module.scss";
 import "aos/dist/aos.css";
+import styles from "../styles/HomeNoAuth.module.scss";
 
 interface IndexPageProps {
   children?: ReactNode;
@@ -62,7 +62,6 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       course: res.data,
     },
-    revalidate: 3600 * 24,
   };
 };
 

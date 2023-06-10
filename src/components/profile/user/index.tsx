@@ -1,11 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
+import ToastComponent from "@/components/common/toast";
 import { useRouter } from "next/router";
 import { FormEvent, useEffect, useState } from "react";
 import { Button, Form, FormGroup, Input, Label } from "reactstrap";
-import ToastComponent from "@/components/common/toast";
 
 import profileService from "@/services/profileService";
-import styles from "../../../styles/profile.module.scss";
+import styles from "../../../../styles/profile.module.scss";
 
 const UserForm = () => {
   const router = useRouter();
@@ -88,15 +88,15 @@ const UserForm = () => {
             {abbreviation
               ? `${abbreviation}`
               : savedFirstName && savedLastName
-              ? `${savedFirstName[0]}${savedLastName[0]}`
-              : ""}
+                ? `${savedFirstName[0]}${savedLastName[0]}`
+                : ""}
           </p>
           <p className={styles.userName}>
             {fullName
               ? fullName
               : savedFirstName && savedLastName
-              ? `${savedFirstName} ${savedLastName}`
-              : "NOME SOBRENOME"}
+                ? `${savedFirstName} ${savedLastName}`
+                : "NOME SOBRENOME"}
           </p>
         </div>
         <div className={styles.membershipTime}>

@@ -1,11 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
+import ToastComponent from "@/components/common/toast";
 import { FormEvent, useEffect, useState } from "react";
 import { Button, Form, FormGroup, Input, Label } from "reactstrap";
-import ToastComponent from "@/components/common/toast";
 
 import profileService from "@/services/profileService";
 
-import styles from "../../../styles/profile.module.scss";
+import styles from "../../../../styles/profile.module.scss";
 
 const PasswordForm = () => {
   const [toastColor, setToastColor] = useState("");
